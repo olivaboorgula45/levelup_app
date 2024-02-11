@@ -34,6 +34,7 @@ class _CourseTabBarState extends State<CourseTabBar>
     return Column(
       children: [
         TabBar(
+          tabAlignment: TabAlignment.start,
           indicatorColor: Colors.white,
           controller: _tabController,
           isScrollable: true,

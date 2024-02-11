@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/data.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FreelancingPortalsScreen extends StatefulWidget {
@@ -12,31 +13,7 @@ class FreelancingPortalsScreen extends StatefulWidget {
 }
 
 class _FreelancingPortalsScreenState extends State<FreelancingPortalsScreen> {
-  final List<Map<String, String>> freelancingPortals = [
-    {"website": "Upwork", "url": "https://www.upwork.com/"},
-    {"website": "Fiverr", "url": "https://www.fiverr.com/"},
-    {"website": "Freelancer", "url": "https://www.freelancer.com/"},
-    {"website": "People Per Hour", "url": "https://www.peopleperhour.com/"},
-    {"website": "Toptal", "url": "https://www.toptal.com/"},
-    {"website": "FlexJobs", "url": "https://www.flexjobs.com/"},
-    {"website": "LinkedIn", "url": "https://www.linkedin.com/"},
-    {"website": "99designs", "url": "https://99designs.com/"},
-    {"website": "Solid Gigs", "url": "https://solidgigs.com/"},
-    {"website": "Codeable", "url": "https://codeable.io/"},
-    {"website": "Dooly", "url": "https://dooly.ai/"},
-    {"website": "Unbounce", "url": "https://unbounce.com/"},
-    {"website": "Dribbble", "url": "https://dribbble.com/"},
-    {"website": "SimplyHired", "url": "https://www.simplyhired.com/"},
-    {
-      "website": "Freelance Writing",
-      "url": "https://www.freelancewriting.com/"
-    },
-    {"website": "We Work Remotely", "url": "https://weworkremotely.com/"},
-    {"website": "Truelancer", "url": "https://www.truelancer.com/"},
-    {"website": "Working Nomads", "url": "https://www.workingnomads.co/"},
-    {"website": "Design Crowd", "url": "https://www.designcrowd.com/"},
-    {"website": "Jooble", "url": "https://jooble.org/"}
-  ];
+  final List<Map<String, String>> freelancingPortals = Data.freelancingPortals;
 
   @override
   Widget build(BuildContext context) {
@@ -60,16 +37,16 @@ class _FreelancingPortalsScreenState extends State<FreelancingPortalsScreen> {
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
+              childAspectRatio: 1.6,
             ),
             itemCount: freelancingPortals.length,
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  _launchURL(freelancingPortals[index]['url']!);
+                  launchUrl(Uri.parse(freelancingPortals[index]['url']!));
                 },
                 child: Card(
                   elevation: 3,
-                  margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                     side: const BorderSide(color: Colors.grey, width: 1.0),
@@ -85,7 +62,7 @@ class _FreelancingPortalsScreenState extends State<FreelancingPortalsScreen> {
                           color: Colors.grey.shade900,
                         ),
                         child: Text(
-                          freelancingPortals[index]['website']!,
+                          freelancingPortals[index]['title']!,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Colors.white70,

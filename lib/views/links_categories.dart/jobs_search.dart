@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/data.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class JobPortalScreen extends StatefulWidget {
@@ -9,26 +10,7 @@ class JobPortalScreen extends StatefulWidget {
 }
 
 class _JobPortalScreenState extends State<JobPortalScreen> {
-  final List<Map<String, String>> jobPortals = [
-    {"website": "LinkedIn ", "url": "https://www.linkedin.com/jobs/"},
-    {"website": "Glassdoor", "url": "https://www.glassdoor.com/index.htm"},
-    {"website": "Indeed", "url": "https://www.indeed.com/"},
-    {"website": "Shine", "url": "https://www.shine.com/"},
-    {"website": "TimesJobs", "url": "https://www.timesjobs.com/"},
-    {"website": "Upwork", "url": "https://www.upwork.com/"},
-    {"website": "Hirect", "url": "https://hirect.in/"},
-    {"website": "Monster", "url": "https://www.monsterindia.com/"},
-    {"website": "Google Job Search", "url": "https://jobs.google.com/"},
-    {"website": "Apna", "url": "https://apna.co/"},
-    {"website": "Quikr", "url": "https://www.quikr.com/jobs"},
-    {"website": "Work India", "url": "https://www.workindia.in/"},
-    {"website": "FoundIt", "url": "https://www.foundit.in/"},
-    {"website": "Freshers World", "url": "https://www.freshersworld.com/"},
-    {"website": "JobsForHer", "url": "https://www.jobsforher.com/"},
-    {"website": "CutShort", "url": "https://www.cutshort.io/"},
-    {"website": "JobSora", "url": "https://www.jobsora.com/"}
-    // Add more job portals as needed
-  ];
+  final List<Map<String, String>> jobPortals = Data.jobPortals;
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +34,16 @@ class _JobPortalScreenState extends State<JobPortalScreen> {
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
+              childAspectRatio: 1.6,
             ),
             itemCount: jobPortals.length,
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  _launchURL(jobPortals[index]['url']!);
+                  launchUrl(Uri.parse(jobPortals[index]['url']!));
                 },
                 child: Card(
                   elevation: 3,
-                  margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                     side: const BorderSide(color: Colors.grey, width: 1.0),
@@ -77,7 +59,7 @@ class _JobPortalScreenState extends State<JobPortalScreen> {
                           color: Colors.grey.shade900,
                         ),
                         child: Text(
-                          jobPortals[index]['website']!,
+                          jobPortals[index]['title']!,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               color: Colors.white70,

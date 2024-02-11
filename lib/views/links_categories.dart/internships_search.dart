@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/data.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InternshipPortalsScreen extends StatefulWidget {
@@ -10,26 +11,7 @@ class InternshipPortalsScreen extends StatefulWidget {
 }
 
 class _InternshipPortalsScreenState extends State<InternshipPortalsScreen> {
-  final List<Map<String, String>> internshipPortals = [
-    {"website": "Internshala", "url": "https://internshala.com/"},
-    {"website": "Lets Intern", "url": "https://www.letsintern.com/"},
-    {"website": "Hello Intern", "url": "https://www.hellointern.com/"},
-    {"website": "Twenty19", "url": "https://www.twenty19.com/"},
-    {"website": "Switch Idea", "url": "https://www.switchidea.com/"},
-    {"website": "Intern Theory", "url": "https://www.interntheory.com/"},
-    {"website": "Skillenza", "url": "https://skillenza.com/"},
-    {"website": "Youth4Work", "url": "https://www.youth4work.com/"},
-    {"website": "Indeed", "url": "https://www.indeed.com/"},
-    {"website": "LinkedIn", "url": "https://www.linkedin.com/"},
-    {"website": "KillerLaunch", "url": "https://www.killerlaunch.com/"},
-    {"website": "Naukri", "url": "https://www.naukri.com/"},
-    {"website": "Shine", "url": "https://www.shine.com/"},
-    {"website": "Monster", "url": "https://www.monsterindia.com/"},
-    {"website": "Glassdoor", "url": "https://www.glassdoor.com/"},
-    {"website": "WayUp", "url": "https://www.wayup.com/"},
-    {"website": "SimplyHired", "url": "https://www.simplyhired.com/"},
-    {"website": "HackerRank", "url": "https://www.hackerrank.com/"}
-  ];
+  final List<Map<String, String>> internshipPortals = Data.internshipPortals;
 
   @override
   Widget build(BuildContext context) {
@@ -53,16 +35,16 @@ class _InternshipPortalsScreenState extends State<InternshipPortalsScreen> {
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
+              childAspectRatio: 1.6,
             ),
             itemCount: internshipPortals.length,
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  _launchURL(internshipPortals[index]['url']!);
+                  launchUrl(Uri.parse(internshipPortals[index]['url']!));
                 },
                 child: Card(
                   elevation: 3,
-                  margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                     side: const BorderSide(color: Colors.grey, width: 1.0),
@@ -78,7 +60,7 @@ class _InternshipPortalsScreenState extends State<InternshipPortalsScreen> {
                           color: Colors.grey.shade900,
                         ),
                         child: Text(
-                          internshipPortals[index]['website']!,
+                          internshipPortals[index]['title']!,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               color: Colors.white70,
