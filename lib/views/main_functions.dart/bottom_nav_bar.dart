@@ -27,7 +27,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey.shade900,
       type: BottomNavigationBarType.fixed,
       selectedItemColor: Colors.white, // Selected icon and label color
       unselectedItemColor: Colors.grey, // Unselected icon and label color
@@ -55,7 +55,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           label: "Search",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.save),
+          icon: Icon(Icons.bookmark_rounded),
           label: "Saved",
         ),
         BottomNavigationBarItem(

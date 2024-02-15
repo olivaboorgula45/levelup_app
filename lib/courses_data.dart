@@ -16,7 +16,6 @@ abstract class Data {
       "avgSalary": "Avg Salary: ₹6-18 LPA"
     },
     {"title": "Cybersecurity Analyst", "avgSalary": "Avg Salary: ₹6-20 LPA"},
-    {"title": "Full Stack Developer", "avgSalary": "Avg Salary: ₹5-15 LPA"},
     {"title": "DevOps Engineer", "avgSalary": "Avg Salary: ₹6-18 LPA"},
     {"title": "Mobile App Developer", "avgSalary": "Avg Salary: ₹5-15 LPA"},
     {"title": "UI/UX Designer", "avgSalary": "Avg Salary: ₹5-15 LPA"},

@@ -1,7 +1,9 @@
+// ignore_for_file: unused_import
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/constants/secret_apikeys.dart';
-import 'package:flutter_application_1/data.dart';
+import 'package:flutter_application_1/courses_data.dart';
 import 'package:flutter_application_1/functions.dart';
 import 'package:flutter_application_1/services/open_ai_services.dart';
 import 'package:flutter_application_1/views/article_screen.dart/content_screen.dart';
@@ -16,6 +18,16 @@ class DemandedCourse extends StatefulWidget {
 class _DemandedCourseState extends State<DemandedCourse> {
   final List<Map<String, dynamic>> demandedCourses = Data.demandedCourses;
 
+  final List<Gradient> cardGradients = [
+    LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [Colors.grey.shade900, Colors.grey.shade900],
+    ),
+     
+    // Add more gradients as needed
+  ];
+
   bool showCPI = false;
 
   @override
@@ -25,50 +37,54 @@ class _DemandedCourseState extends State<DemandedCourse> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Colors.black, Color.fromARGB(255, 3, 12, 65)],
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            body: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1.8,
               ),
-            ),
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              body: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: 1.8),
-                itemBuilder: (BuildContext context, int index) {
-                  final course = demandedCourses[index];
-                  return GestureDetector(
-                    onTap: () async {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ArticleScreen(
-                          courseName: course['title'],
-                        ),
-                      ));
-                    },
-                    child: Card(
-                      elevation: 3,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          side: const BorderSide(
-                              color: Colors.grey,
-                              width: 1.0) // Optional: Add rounded corners
-                          ),
-                      color: Colors.black,
+              itemBuilder: (BuildContext context, int index) {
+                final course = demandedCourses[index];
+                final gradient =
+                    cardGradients[index % cardGradients.length]; // Cycle through gradients
+
+                return GestureDetector(
+                  onTap: () async {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ArticleScreen(
+                        courseName: course['title'],
+                      ),
+                    ));
+                  },
+                  child: Card(
+                    elevation: 3,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      side: const BorderSide(
+                          color: Colors.grey,
+                          width: 1), // Optional: Add rounded corners
+                    ),
+                    color: Colors.transparent,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        gradient: gradient,
+                      ),
                       child: Center(
                         child: ListTile(
-                          title: Text(course['title'],
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white70,
-                              )),
+                          title: Text(
+                            course['title'],
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white,
+                            ),
+                          ),
                           subtitle: Text(
                             course['avgSalary'],
                             style: const TextStyle(
-                              color: Colors.white70,
+                              color: Colors.white,
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
                             ),
@@ -76,16 +92,19 @@ class _DemandedCourseState extends State<DemandedCourse> {
                         ),
                       ),
                     ),
-                  );
-                },
-                itemCount: demandedCourses.length,
-              ),
+                  ),
+                );
+              },
+              itemCount: demandedCourses.length,
             ),
           ),
           if (showCPI)
             Container(
-                decoration: BoxDecoration(color: Colors.black.withOpacity(0.6)),
-                child: Center(child: CircularProgressIndicator()))
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.6),
+              ),
+              child: const Center(child: CircularProgressIndicator()),
+            )
         ],
       ),
     );

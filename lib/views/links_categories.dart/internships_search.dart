@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/data.dart';
+import 'package:flutter_application_1/courses_data.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InternshipPortalsScreen extends StatefulWidget {
@@ -13,79 +13,71 @@ class InternshipPortalsScreen extends StatefulWidget {
 class _InternshipPortalsScreenState extends State<InternshipPortalsScreen> {
   final List<Map<String, String>> internshipPortals = Data.internshipPortals;
 
+  final List<Gradient> cardGradients = [
+     LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [Colors.grey.shade900, Colors.grey.shade900],
+    ),
+     
+    // Add more gradients as needed
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
       data: MediaQuery.of(context),
-      child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.black,
-              Color.fromARGB(255, 3, 12, 65),
-            ],
+      child: Scaffold(
+        backgroundColor: Colors.grey.shade900,
+        body: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+            childAspectRatio: 1.8,
           ),
-        ),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1.6,
-            ),
-            itemCount: internshipPortals.length,
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  launchUrl(Uri.parse(internshipPortals[index]['url']!));
-                },
-                child: Card(
-                  elevation: 3,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    side: const BorderSide(color: Colors.grey, width: 1.0),
+          itemCount: internshipPortals.length,
+          itemBuilder: (context, index) {
+            final gradient =
+                cardGradients[index % cardGradients.length]; // Cycle through gradients
+
+            return InkWell(
+              onTap: () {
+                launchUrl(Uri.parse(internshipPortals[index]['url']!));
+              },
+              child: Card(
+                margin: const EdgeInsets.all(5),
+                elevation: 3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  side: const BorderSide(color: Colors.grey, width: 1),
+                ),
+                color: Colors.transparent,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: gradient,
                   ),
-                  color: Colors.black,
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.all(18.0),
-                      child: Container(
-                        padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey.shade900,
-                        ),
-                        child: Text(
-                          internshipPortals[index]['title']!,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              color: Colors.white70,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
-                        ),
+                      child: Text(
+                        internshipPortals[index]['title']!,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
                 ),
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
 
-  Future<void> _launchURL(String url) async {
-    // ignore: deprecated_member_use
-    if (await canLaunch(url)) {
-      // ignore: deprecated_member_use
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 }

@@ -23,6 +23,7 @@ dependencies:
   firebase_core: ^2.25.4
   firebase_auth: ^4.17.4
   share_plus: ^7.2.2
+  http: ^1.2.0
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true

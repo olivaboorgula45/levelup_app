@@ -1,10 +1,11 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, deprecated_member_use
 
 import 'dart:async';
+// ignore: unused_import
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/data.dart';
+import 'package:flutter_application_1/courses_data.dart';
 import 'package:flutter_application_1/views/article_screen.dart/content_screen.dart';
 import 'package:flutter_application_1/views/main_functions.dart/bottom_nav_bar.dart';
 import 'package:flutter_application_1/views/main_functions.dart/home_screen.dart';
@@ -63,10 +64,10 @@ class _SavedCoursesScreenState extends State<SavedCoursesScreen> {
         data: MediaQuery.of(context),
         child: Scaffold(
           bottomNavigationBar: BottomNavBar(),
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.grey.shade900,
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.grey.shade900,
             title: Center(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 15),
@@ -83,7 +84,7 @@ class _SavedCoursesScreenState extends State<SavedCoursesScreen> {
           ),
           body: savedCourses.isEmpty
               ? Center(
-                  child: Text('No saved courses.'),
+                  child: Text('No saved courses.', style: TextStyle(color: Colors.white),),
                 )
               : Stack(
                   alignment: Alignment.center,
@@ -98,17 +99,17 @@ class _SavedCoursesScreenState extends State<SavedCoursesScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                               side: const BorderSide(
-                                  color: Colors.grey, width: 1.0),
+                                  color: Colors.white, width: 1.0),
                             ),
                             margin: const EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 20),
                             elevation: 3,
-                            color: Colors.black,
+                            color: Colors.grey.shade900,
                             child: Stack(
                               children: [
                                 Positioned(
-                                  top: 5,
-                                  right: 5,
+                                  top: 2,
+                                  right: 2,
                                   child: IconButton(
                                     onPressed: () {
                                       SharedPreferences.getInstance()
@@ -131,7 +132,7 @@ class _SavedCoursesScreenState extends State<SavedCoursesScreen> {
                                     },
                                     icon: const Icon(
                                       Icons.delete,
-                                      color: Colors.grey,
+                                      color: Colors.white,
                                       size: 20,
                                     ),
                                   ),
@@ -141,9 +142,9 @@ class _SavedCoursesScreenState extends State<SavedCoursesScreen> {
                                     title: Text(
                                       savedCourses[index]['title']!,
                                       style: const TextStyle(
-                                        fontWeight: FontWeight.w400,
+                                        fontWeight: FontWeight.w500,
                                         fontSize: 14,
-                                        color: Colors.white70,
+                                        color: Colors.white,
                                       ),
                                     ),
                                     onTap: () {

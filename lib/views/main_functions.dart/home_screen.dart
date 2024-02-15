@@ -1,4 +1,7 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:flutter_application_1/services/open_ai_services.dart';
 import 'package:flutter_application_1/views/main_functions.dart/bottom_nav_bar.dart';
 import 'package:flutter_application_1/views/main_functions.dart/courses_tab_bar.dart';
@@ -19,23 +22,23 @@ class _HomePageState extends State<HomePage> {
       child: MediaQuery(
         data: MediaQuery.of(context),
         child: Scaffold(
-          bottomNavigationBar: BottomNavBar(),
+          bottomNavigationBar: const BottomNavBar(),
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.grey.shade900,
             elevation: 0,
             title: const Text(
               "Level Up",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w500,
-                color: Colors.indigo,
+                color: Colors.white,
               ),
             ),
           ),
 
           body: const CourseTabBar(),
-          backgroundColor: Colors.black, // Add your CustomTabBar here
+          backgroundColor: Colors.grey.shade900, // Add your CustomTabBar here
         ),
       ),
     );

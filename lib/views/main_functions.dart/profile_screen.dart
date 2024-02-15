@@ -6,10 +6,12 @@ import 'package:flutter_application_1/views/main_functions.dart/login_screen.dar
 import 'package:share_plus/share_plus.dart';
 
 class ProfileScreen extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   const ProfileScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () {
         currentPage = 0;
@@ -18,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
         // ));
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => HomePage(),
+              builder: (context) => const HomePage(),
             ),
             (route) => false);
         return Future.value(false);
@@ -26,11 +28,11 @@ class ProfileScreen extends StatelessWidget {
       child: MediaQuery(
         data: MediaQuery.of(context),
         child: Scaffold(
-          bottomNavigationBar: BottomNavBar(),
-          backgroundColor: Colors.black,
+          bottomNavigationBar: const BottomNavBar(),
+          backgroundColor: Colors.grey.shade900,
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.grey.shade900,
             title: const Center(
               child: Text(
                 'Profile',
@@ -60,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
                     child: const Icon(
                       Icons.person,
                       size: 60,
-                      color: Colors.white70,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -69,14 +71,15 @@ class ProfileScreen extends StatelessWidget {
                     height: 50,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: Colors.white, ),
+                      borderRadius: BorderRadius.circular(20)
                     ),
                     padding: const EdgeInsets.all(10),
                     alignment: Alignment.center,
                     child: FittedBox(
                       child: Text(
                         FirebaseAuth.instance.currentUser?.email ?? '',
-                        style: TextStyle(fontSize: 16, color: Colors.white70),
+                        style: const TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ),
                   ),
@@ -94,8 +97,8 @@ class ProfileScreen extends StatelessWidget {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text('Logout'),
-                              content: Text('Sure want to logout?'),
+                              title: const Text('Logout'),
+                              content: const Text('Sure want to logout?'),
                               actions: [
                                 TextButton(
                                     onPressed: () {
@@ -104,20 +107,20 @@ class ProfileScreen extends StatelessWidget {
                                               .pushReplacement(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          LoginScreen())));
+                                                          const LoginScreen())));
 
                                       Navigator.of(context).pop();
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
+                                          .showSnackBar(const SnackBar(
                                               content:
                                                   Text('Logout Successful')));
                                     },
-                                    child: Text('Logout')),
+                                    child: const Text('Logout')),
                                 TextButton(
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    child: Text('Cancel'))
+                                    child: const Text('Cancel'))
                               ],
                             );
                           });
@@ -150,20 +153,21 @@ class ProfileScreen extends StatelessWidget {
       onTap: onTap(),
       child: Container(
         height: 50,
-        width: double.infinity,
+        width: 300,
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
+          border: Border.all(color: Colors.white),
+          borderRadius: BorderRadius.circular(20)
         ),
         padding: const EdgeInsets.all(10),
         alignment: Alignment.centerLeft,
         child: Row(
           children: [
-            Icon(iconData, color: Colors.white70),
+            Icon(iconData, color: Colors.white),
             const SizedBox(width: 10),
             FittedBox(
               child: Text(
                 title,
-                style: const TextStyle(fontSize: 16, color: Colors.white70),
+                style: const TextStyle(fontSize: 16, color: Colors.white),
               ),
             ),
           ],

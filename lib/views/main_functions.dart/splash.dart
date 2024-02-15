@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/views/main_functions.dart/bottom_nav_bar.dart';
@@ -9,11 +11,11 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 5), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => FirebaseAuth.instance.currentUser != null
             ? const HomePage()
-            : LoginScreen(),
+            : const LoginScreen(),
       ));
     });
     return Scaffold(
@@ -22,7 +24,7 @@ class SplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/images/levelup-logo.png'),
-            CircularProgressIndicator(),
+            const CircularProgressIndicator(color: Colors.black,),
           ],
         ),
       ),

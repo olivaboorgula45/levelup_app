@@ -43,7 +43,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
           });
         } else {
           ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('Error')));
+              .showSnackBar(const SnackBar(content: Text('Error')));
         }
         setState(() {
           showCPI = false;
@@ -58,61 +58,64 @@ class _ArticleScreenState extends State<ArticleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
-        title: Text(widget.courseName),
-        actions: [
-          IconButton(
-              onPressed: () {
-                SharedPreferences.getInstance().then((value) {
-                  List<String> current = value.getStringList('data') ?? [];
-                  if (current.contains(widget.courseName)) {
-                    current.remove(widget.courseName);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Course Unsaved')));
-                  } else {
-                    current.add(widget.courseName);
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text('Course Saved')));
-                  }
-                  value.setStringList('data', current);
-                  setState(() {
-                    saved = current;
+    return MediaQuery(
+      data: MediaQuery.of(context),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          title: Text(widget.courseName),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  SharedPreferences.getInstance().then((value) {
+                    List<String> current = value.getStringList('data') ?? [];
+                    if (current.contains(widget.courseName)) {
+                      current.remove(widget.courseName);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Course Unsaved')));
+                    } else {
+                      current.add(widget.courseName);
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(const SnackBar(content: Text('Course saved successfully')));
+                    }
+                    value.setStringList('data', current);
+                    setState(() {
+                      saved = current;
+                    });
                   });
-                });
-              },
-              icon: Icon(saved.contains(widget.courseName)
-                  ? Icons.bookmark_rounded
-                  : Icons.bookmark_outline_rounded))
-        ],
-      ),
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          if (!showCPI)
-            Container(
-              margin: const EdgeInsets.all(16.0),
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12), color: Colors.white),
-              child: SingleChildScrollView(child: Text(generatedArticle)),
-            ),
-          if (showCPI)
-            Container(
-                decoration: BoxDecoration(color: Colors.black.withOpacity(0.6)),
-                child: Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(),
-                    Text('Just wait few seconds. Article is generating')
-                  ],
-                )))
-        ],
+                },
+                icon: Icon(saved.contains(widget.courseName)
+                    ? Icons.bookmark_rounded
+                    : Icons.bookmark_outline_rounded))
+          ],
+        ),
+        body: Stack(
+          alignment: Alignment.center,
+          children: [
+            if (!showCPI)
+              Container(
+                margin: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12), color: Colors.white,border: Border.all(color: Colors.grey, width: 2)),
+                child: SingleChildScrollView(child: Text(generatedArticle)),
+              ),
+            if (showCPI)
+              Container(
+                  decoration: BoxDecoration(color: Colors.white.withOpacity(0.6)),
+                  child: const Center(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                      Text('Just wait few seconds. Article is generating by AI...', style: TextStyle(color: Colors.black),)
+                    ],
+                  )))
+          ],
+        ),
       ),
     );
   }

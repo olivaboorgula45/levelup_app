@@ -1,8 +1,8 @@
-import 'dart:convert';
+// ignore_for_file: deprecated_member_use
+
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/data.dart';
-import 'package:flutter_application_1/functions.dart';
+import 'package:flutter_application_1/courses_data.dart';
 import 'package:flutter_application_1/views/article_screen.dart/content_screen.dart';
 import 'package:flutter_application_1/views/main_functions.dart/bottom_nav_bar.dart';
 import 'package:flutter_application_1/views/main_functions.dart/home_screen.dart';
@@ -29,7 +29,7 @@ class _CourseSearchState extends State<CourseSearch> {
         // ));
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => HomePage(),
+              builder: (context) => const HomePage(),
             ),
             (route) => false);
         return Future.value(false);
@@ -37,8 +37,8 @@ class _CourseSearchState extends State<CourseSearch> {
       child: MediaQuery(
         data: MediaQuery.of(context),
         child: Scaffold(
-          bottomNavigationBar: BottomNavBar(),
-          backgroundColor: Colors.black, // Set background color to black
+          bottomNavigationBar: const BottomNavBar(),
+          backgroundColor: Colors.grey.shade900, // Set background color to black
           body: Stack(
             alignment: Alignment.center,
             children: [
@@ -51,23 +51,23 @@ class _CourseSearchState extends State<CourseSearch> {
                       child: TextField(
                         controller: _controller,
                         style: const TextStyle(
-                            color: Colors.white70), // Set text color to white
-                        cursorColor: Colors.white70, // Set cursor color to white
+                            color: Colors.white), // Set text color to white
+                        cursorColor: Colors.white, // Set cursor color to white
                         decoration: InputDecoration(
                           hintText: 'Search for a course...',
                           hintStyle: const TextStyle(
-                              color: Colors.white70,
+                              color: Colors.white,
                               fontSize: 14), // Set hint text color to white
                           prefixIcon: const Icon(
                             Icons.search,
-                            color: Colors.white70,
+                            color: Colors.white,
                             size: 18,
                           ), // Set search icon color to white
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(
                                 color:
-                                    Colors.white70), // Set border color to white
+                                    Colors.white), // Set border color to white
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -115,7 +115,7 @@ class _CourseSearchState extends State<CourseSearch> {
                           },
                           title: Text(
                             data[index]['title'] ?? '',
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                           subtitle: Text(data[index]['avgSalary'] ?? ''),
                         ),
@@ -127,8 +127,8 @@ class _CourseSearchState extends State<CourseSearch> {
               if (showCPI)
                 Container(
                     decoration:
-                        BoxDecoration(color: Colors.black.withOpacity(0.6)),
-                    child: Center(child: CircularProgressIndicator()))
+                        BoxDecoration(color: Colors.white.withOpacity(0.6)),
+                    child: const Center(child: CircularProgressIndicator()))
             ],
           ),
         ),

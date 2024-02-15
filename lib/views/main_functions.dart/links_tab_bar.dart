@@ -28,6 +28,7 @@ class _LiknsTabBarState extends State<LiknsTabBar>
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () {
         currentPage = 0;
@@ -36,7 +37,7 @@ class _LiknsTabBarState extends State<LiknsTabBar>
         // ));
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => HomePage(),
+              builder: (context) => const HomePage(),
             ),
             (route) => false);
         return Future.value(false);
@@ -44,7 +45,7 @@ class _LiknsTabBarState extends State<LiknsTabBar>
       child: MediaQuery(
         data: MediaQuery.of(context),
         child: Scaffold(
-          bottomNavigationBar: BottomNavBar(),
+          bottomNavigationBar: const BottomNavBar(),
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: const Padding(
@@ -57,7 +58,7 @@ class _LiknsTabBarState extends State<LiknsTabBar>
                     fontWeight: FontWeight.w500),
               ),
             ),
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.grey.shade900,
             toolbarHeight: 50,
             elevation: 0,
           ),
@@ -65,7 +66,7 @@ class _LiknsTabBarState extends State<LiknsTabBar>
             children: [
               SafeArea(
                 child: Container(
-                  color: Colors.black,
+                  color: Colors.grey.shade900,
                   child: TabBar(
                     tabAlignment: TabAlignment.start,
                     indicatorColor: Colors.white,

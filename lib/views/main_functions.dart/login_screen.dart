@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_application_1/views/main_functions.dart/bottom_nav_bar.dart';
 import 'package:flutter_application_1/views/main_functions.dart/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -19,14 +17,14 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.grey.shade900,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           'Login',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.grey.shade900,
       ),
       body: Stack(
         alignment: Alignment.center,
@@ -115,14 +113,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   width: double.infinity,
                   child: ElevatedButton(
-                      style: ButtonStyle(
+                      style: const ButtonStyle(
                           backgroundColor:
                               MaterialStatePropertyAll(Colors.white),
                           foregroundColor: MaterialStatePropertyAll(
@@ -132,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         setState(() {
                           showCPI = true;
                         });
-                        Future.delayed(Duration(seconds: 2), () async {
+                        Future.delayed(const Duration(seconds: 3), () async {
                           try {
                             await FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
@@ -148,7 +146,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                     .then((value) {
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                          builder: (context) => HomePage()));
+                                          builder: (context) =>
+                                              const HomePage()));
                                   setState(() {
                                     showCPI = false;
                                   });
@@ -157,6 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 setState(() {
                                   showCPI = false;
                                 });
+                                // ignore: use_build_context_synchronously
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content: Text(e.message.toString())));
@@ -175,21 +175,25 @@ class _LoginScreenState extends State<LoginScreen> {
                                     .then((value) {
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                          builder: (context) => HomePage()));
+                                          builder: (context) =>
+                                              const HomePage()));
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('Successful')));
+                                      const SnackBar(
+                                        content: Text('Successfully logged in!')));
                                 });
                               } on FirebaseException catch (e) {
                                 setState(() {
                                   showCPI = false;
                                 });
+                                // ignore: use_build_context_synchronously
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content: Text(e.message.toString())));
                               }
                             } else {
+                              // ignore: use_build_context_synchronously
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Error')));
+                                  const SnackBar(content: Text('Error')));
                             }
                             setState(() {
                               showCPI = false;
@@ -197,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                         });
                       },
-                      child: Text('Submit')),
+                      child: const Text('Submit')),
                 )
               ],
             ),
@@ -205,7 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
           if (showCPI)
             Container(
                 decoration: BoxDecoration(color: Colors.black.withOpacity(0.6)),
-                child: Center(child: CircularProgressIndicator()))
+                child: const Center(child: CircularProgressIndicator()))
         ],
       ),
     );
